@@ -12,9 +12,14 @@ function App() {
     <Die key={index} value={item} />
   ));
 
+  const rollDice = () => {
+    setDice(generateAllNewDice());
+  };
+
   return (
     <main>
       <div className="dice-container">{diceElements}</div>
+      <button className="roll-btn" onClick={rollDice}>Roll</button>
     </main>
   );
 }
