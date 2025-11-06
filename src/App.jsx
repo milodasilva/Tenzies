@@ -27,9 +27,12 @@ export default function App() {
 
   function hold(id) {
     console.log("ID " + id);
+    setDice((prevDice) =>
+      prevDice.map((item) => {
+        return item.id === id ? { ...item, isHeld: !item.isHeld } : item;
+      }),
+    );
   }
-
-  // Hold(props.id)
 
   return (
     <main>
