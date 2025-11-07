@@ -21,8 +21,12 @@ export default function App() {
       hold={() => hold(item.id)}
     />
   ));
-  const rollDice = () => {
-    setDice(generateAllNewDice());
+
+  function rollDice() {
+    setDice((prevDice) => 
+      prevDice.map((item)=> {
+      return item.isHeld ? {...item, value: Math.ceil(Math.random() * 6) } : item   
+    }))
   };
 
   function hold(id) {
