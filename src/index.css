@@ -27,6 +27,7 @@ main {
   justify-content: space-evenly;
   align-items: center;
 }
+
 .dice-container {
   display: grid;
   grid-template: auto auto / repeat(5, 1fr);
@@ -46,7 +47,9 @@ main {
 
 .roll-btn {
   height: 50px;
-  width: 100px;
+  white-space: nowrap; 
+  width: auto;
+  padding: 6px 21px;
   border-radius: 6px;
   background: #5035ff;
   color: white;

@@ -5,10 +5,14 @@ import { nanoid } from "nanoid";
 export default function App() {
   const [dice, setDice] = useState(generateAllNewDice());
 
+  const gameWon =
+    dice.every((die) => die.isHeld) &&
+    dice.every((die) => die.value === dice[0].value);
+
   function generateAllNewDice() {
     return Array.from({ length: 10 }, () => ({
       value: Math.ceil(Math.random() * 6),
-      isHeld: true,
+      isHeld: false, // agora começa desbloqueado
       id: nanoid(),
     }));
   }
@@ -23,14 +27,16 @@ export default function App() {
   ));
 
   function rollDice() {
-    setDice((prevDice) => 
-      prevDice.map((item)=> {
-      return item.isHeld ? {...item, value: Math.ceil(Math.random() * 6) } : item   
-    }))
-  };
-
+    setDice((prevDice) =>
+      prevDice.map((item) =>
+        item.isHeld
+          ? item // não altera se está segurado
+          : { ...item, value: Math.ceil(Math.random() * 6) },
+      ),
+    );
+  }
   function hold(id) {
-    console.log("ID " + id);
+    // console.log("ID " + id);
     setDice((prevDice) =>
       prevDice.map((item) => {
         return item.id === id ? { ...item, isHeld: !item.isHeld } : item;
@@ -42,7 +48,7 @@ export default function App() {
     <main>
       <div className="dice-container">{diceElements}</div>
       <button className="roll-btn" onClick={rollDice}>
-        Roll
+         {gameWon ? "New Game" : "Roll"  } 
       </button>
     </main>
   );
