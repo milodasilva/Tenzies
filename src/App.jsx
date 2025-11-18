@@ -11,7 +11,6 @@ export default function App() {
     dice.every((die) => die.value === dice[0].value);
 
   function generateAllNewDice() {
-    console.log("Hello")
     return Array.from({ length: 10 }, () => ({
       value: Math.ceil(Math.random() * 6),
       isHeld: false, // agora começa desbloqueado
@@ -29,13 +28,18 @@ export default function App() {
   ));
 
   function rollDice() {
-    setDice((prevDice) =>
-      prevDice.map((item) =>
-        item.isHeld
-          ? item // não altera se está segurado
-          : { ...item, value: Math.ceil(Math.random() * 6) },
-      ),
-    );
+    // New game if gameWon is false
+    if (!gameWon) {
+      setDice((prevDice) =>
+        prevDice.map((item) =>
+          item.isHeld
+            ? item // não altera se está segurado
+            : { ...item, value: Math.ceil(Math.random() * 6) },
+        ),
+      );
+    } else {
+      setDice(generateAllNewDice());
+    }
   }
 
   function hold(id) {
