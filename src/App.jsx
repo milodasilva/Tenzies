@@ -1,6 +1,7 @@
 import Die from "./Die";
 import { useState } from "react";
 import { nanoid } from "nanoid";
+import Confetti from "react-confetti";
 
 export default function App() {
   const [dice, setDice] = useState(generateAllNewDice());
@@ -35,6 +36,7 @@ export default function App() {
       ),
     );
   }
+
   function hold(id) {
     // console.log("ID " + id);
     setDice((prevDice) =>
@@ -46,9 +48,10 @@ export default function App() {
 
   return (
     <main>
+      {gameWon && <Confetti />}
       <div className="dice-container">{diceElements}</div>
       <button className="roll-btn" onClick={rollDice}>
-         {gameWon ? "New Game" : "Roll"  } 
+        {gameWon ? "New Game" : "Roll"}
       </button>
     </main>
   );

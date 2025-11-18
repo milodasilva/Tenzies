@@ -16,6 +16,7 @@ div#root {
   width: 100%;
   max-height: 400px;
   max-width: 400px;
+
 }
 
 main {
@@ -26,7 +27,9 @@ main {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+
 }
+
 
 .dice-container {
   display: grid;
