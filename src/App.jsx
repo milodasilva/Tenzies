@@ -54,6 +54,11 @@ export default function App() {
   return (
     <main>
       {gameWon && <Confetti />}
+      <div aria-live="polite" className="sr-only">
+        {gameWon && (
+          <p>Congratulations! You won! Press "New Game to start again."</p>
+        )}
+      </div>
       <div className="dice-container">{diceElements}</div>
       <button className="roll-btn" onClick={rollDice}>
         {gameWon ? "New Game" : "Roll"}
